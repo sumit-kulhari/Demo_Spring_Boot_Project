@@ -36,7 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public void deleteEmploye(Integer eid) {
+    public void deleteEmploye(int eid) {
         boolean exists = employeeDao.existsById(eid);
         if(!exists){
             throw new IllegalStateException("employee with Id "+eid+" does not exists");

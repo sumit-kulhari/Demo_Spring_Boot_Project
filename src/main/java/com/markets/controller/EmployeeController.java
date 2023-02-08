@@ -26,10 +26,14 @@ public class EmployeeController {
         return "Employee added";
     }
 
+//    @DeleteMapping("/delete")
+//    public void deleteEmployee(@RequestBody EmployeeEntity employee){
+//        employeeService.deleteEmploye(employee);
+//    }
     @DeleteMapping("/delete/{eid}")
     public String deleteEmployee(@PathVariable("eid") Integer eid){
         employeeService.deleteEmploye(eid);
-        return "Object delete Successfully";
+        return "Delete is working";
     }
 
     @GetMapping( "/getbyID/{eid}")
