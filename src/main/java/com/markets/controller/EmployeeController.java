@@ -21,16 +21,16 @@ public class EmployeeController {
     }
 
     @PostMapping("/saveEmployee")
-    public String saveEmployee(@RequestBody EmployeeEntity employee) {
+    public ResponseEntity<EmployeeEntity> saveEmployee(@RequestBody EmployeeEntity employee) {
         // save employee added
-        employeeService.saveEmployee(employee);
-        return "Employee added";
+        EmployeeEntity employee1 = employeeService.saveEmployee(employee);
+        return new ResponseEntity<EmployeeEntity>(employee1,new HttpHeaders(), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{eid}")
-    public String deleteEmployee(@PathVariable("eid") Integer eid){
-        employeeService.deleteEmploye(eid);
-        return "Delete is working";
+    public ResponseEntity<EmployeeEntity> deleteEmployee(@PathVariable("eid") Integer eid){
+        EmployeeEntity employee = employeeService.deleteEmployee(eid);
+        return new ResponseEntity<EmployeeEntity>(employee,new HttpHeaders(), HttpStatus.OK);
     }
 
     @GetMapping( "/getbyID/{eid}")
@@ -40,8 +40,8 @@ public class EmployeeController {
     }
 
     @PutMapping("/updateEmployee")
-    public String updateEmployee(@RequestBody EmployeeEntity employee){
-        employeeService.updateEmployee(employee);
-        return "Object updated Successfully";
+    public ResponseEntity<EmployeeEntity> updateEmployee(@RequestBody EmployeeEntity employee){
+        EmployeeEntity employee1 = employeeService.updateEmployee(employee);
+        return new ResponseEntity<EmployeeEntity>(employee1,new HttpHeaders(), HttpStatus.OK);
     }
 }

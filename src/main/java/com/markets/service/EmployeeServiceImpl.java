@@ -25,7 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public void saveEmployee(EmployeeEntity employee) {
+    public EmployeeEntity saveEmployee(EmployeeEntity employee) {
         boolean exists = employeeDao.existsById(employee.getEid());
         if(!exists){
             employeeDao.save(employee);
@@ -33,16 +33,18 @@ public class EmployeeServiceImpl implements EmployeeService{
         else {
             System.out.println("Record already present");
         }
+        return employee;
     }
 
     @Override
-    public void deleteEmploye(int eid) {
+    public EmployeeEntity deleteEmployee(int eid) {
         boolean exists = employeeDao.existsById(eid);
         if(!exists){
             throw new IllegalStateException("employee with Id "+eid+" does not exists");
         }
         employeeDao.deleteById(eid);
         System.out.println("Deleted Successfully");
+        return null;
     }
 
     @Override
