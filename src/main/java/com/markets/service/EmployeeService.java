@@ -9,7 +9,6 @@ public interface EmployeeService {
     EmployeeEntity saveEmployee(EmployeeEntity employee);
     EmployeeEntity deleteEmployee(int eid);
     EmployeeEntity searchEmployee(Integer eid);
-
     EmployeeEntity updateEmployee(EmployeeEntity employee);
 //    EmployeeEntity getEmployeeById(long id);
 //    void deleteEmployeeById(long id);

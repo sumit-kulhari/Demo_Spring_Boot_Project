@@ -3,18 +3,25 @@ package com.markets.controller;
 import com.markets.entity.EmployeeEntity;
 import com.markets.service.EmployeeService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @AllArgsConstructor
 @RestController
+@RequestMapping("/api/v1")
 public class EmployeeController {
 
     private EmployeeService employeeService;
 
+    @Autowired
+    private DiscoveryClient discoveryClient;
     @GetMapping("/getall")
     public List<EmployeeEntity> displayall(){
         return employeeService.getAllEmployees();
@@ -43,5 +50,11 @@ public class EmployeeController {
     public ResponseEntity<EmployeeEntity> updateEmployee(@RequestBody EmployeeEntity employee){
         EmployeeEntity employee1 = employeeService.updateEmployee(employee);
         return new ResponseEntity<>(employee1, new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @RequestMapping("/service-instances/{MarketsApplication}")
+    public List<ServiceInstance> serviceInstancesByApplicationName(
+            @PathVariable String MarketsApplication) {
+        return this.discoveryClient.getInstances(MarketsApplication);
     }
 }
